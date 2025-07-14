@@ -10,11 +10,11 @@ from langchain_core.output_parsers import StrOutputParser
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:/Working/C_work/Coding/LangChain/.env/service_account.json"
 
-loader = TextLoader('data.txt',encoding='utf-8')
+loader = TextLoader('160-KB.txt',encoding='utf-8')
 documents = loader.load()
 
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=100,
+    chunk_size=800,
     chunk_overlap=0
 )
 chunks = text_splitter.split_documents(documents)
@@ -90,5 +90,11 @@ rag_chain = (
 #     | StrOutputParser()
 # )
 
-result = rag_chain.invoke("อธิบายเกี่ยวกับข้อมูลข้างต้น")
-print(result)
+while True:
+    user_input = input("Enter your question: ")
+
+    if user_input.lower() in ["quit","q","exit"]:
+        print("exited.")
+    else:
+        result = rag_chain.invoke(user_input)
+        print(result)
