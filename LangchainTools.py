@@ -35,7 +35,7 @@ llm = init_chat_model(
 llm_with_tools = llm.bind_tools([multiply])
 
 # ทดสอบ prompt ธรรมดา
-result = llm_with_tools.invoke("Hello World")
+result = llm_with_tools.invoke("What is 2 multiplied by 5?")
 print(f"Without tools: '{result.content}'")
 print("Tool calls:", result.tool_calls)
 
