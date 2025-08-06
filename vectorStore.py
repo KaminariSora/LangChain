@@ -1,63 +1,47 @@
 import os
 from langchain_google_vertexai.embeddings import VertexAIEmbeddings
-from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_core.documents import Document
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import FAISS  # ใช้ FAISS vector store
 
+# กำหนด path ไปยัง service account ของ Google
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "D:/Working/C_work/Coding/LangChain/.env/service_account.json"
 
-loader = TextLoader('data.txt',encoding='utf-8')
+# โหลดเอกสารจากไฟล์
+loader = TextLoader('data.txt', encoding='utf-8')
 documents = loader.load()
 
+# แบ่งข้อความเป็น chunk
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=100,
     chunk_overlap=0
 )
 chunks = text_splitter.split_documents(documents)
-print(chunks)
 
-# documents = [
-#     "ชื่อบริษัท : KamiSora",
-#     "ข้อมูลธุรกิจ : จัดจำหน่ายของเล่นและหนังสือการ์ตูน",
-#     "ผู้ก่อตั้ง : โซระ",
-#     "ปีที่ก่อตั้ง : 2568",
-# ]
-
+# สร้าง embeddings ด้วย Gemini
 embedding_model = VertexAIEmbeddings(
     model_name="gemini-embedding-001",
     location="us-central1"
 )
 
-vector_store = InMemoryVectorStore(embedding=embedding_model)
+# สร้าง FAISS vector store
+# vector_store = FAISS.from_documents(chunks, embedding_model)
+# vector_store.save_local("faiss_index/")
+vector_store = FAISS.load_local(
+    "faiss_index/", 
+    embedding_model, 
+    allow_dangerous_deserialization=True)
 
-print("Adding documents one by one...")
-for i, doc_item in enumerate(chunks):
-    try:
-        if isinstance(doc_item, Document):
-            doc = doc_item
-            print(f"Document {i+1} is already a Document object")
-        elif isinstance(doc_item, str):
-            doc = Document(page_content=doc_item)
-            print(f"Created Document object from string: {doc_item}")
-        else:
-            doc = Document(page_content=str(doc_item))
-            print(f"Converted to string and created Document: {str(doc_item)}")
-
-        vector_store.add_documents([doc])
-        print(f"✓ Successfully added document {i+1}")
-
-    except Exception as e:
-        print(f"✗ Error adding document {i+1}: {str(e)}")
-
-print(f"\nCompleted adding documents to vector store!")
-
+# คำค้นหา
 query = "โซระ"
 print(f"\nSearching for: '{query}'")
 
+# ค้นหา similarity
 results = vector_store.similarity_search(query, k=2)
 print("\nTop 2 results:")
 for i, result in enumerate(results, 1):
     print(f"{i}. {result.page_content}")
 
-retrievers = vector_store.as_retriever()
+# สร้าง retriever จาก FAISS store
+retriever = vector_store.as_retriever()
