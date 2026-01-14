@@ -18,8 +18,10 @@ prompt = ChatPromptTemplate.from_messages(
 # model
 llm = init_chat_model(
     "gemini-2.0-flash",
-    model_provider="google_genai",
-    temperature=0.8
+    model_provider="google_vertexai",
+    project="gcp-pttdigital-lab",
+    location="us-central1",
+    temperature=0.8,
 )
 
 # parser
@@ -30,9 +32,9 @@ chain = prompt | llm | parser
 # print(chain)
 
 # เรียกใช้งาน model
-# response = llm.invoke("นายกรัฐมนตรีของไทยคนล่าสุดคือใคร")
-# print("Bot response: ",response.content)
+response = llm.invoke("นายกรัฐมนตรีของไทยคนล่าสุดคือใคร")
+print("Bot response: ",response.content)
 
 # เรียกใช้งาน Chain
-response_chain = chain.invoke({"expertise":"เชฟ","topic":"เมนู","amount":5})
-print("Chain response: ",response_chain)
+# response_chain = chain.invoke({"expertise":"เชฟ","topic":"เมนู","amount":5})
+# print("Chain response: ",response_chain)
