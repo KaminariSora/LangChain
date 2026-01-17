@@ -1,8 +1,6 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import CommaSeparatedListOutputParser, JsonOutputParser
 from langchain_ollama import ChatOllama
-from langchain.tools import tool
-from langchain.agents import create_agent
 
 # input
 userInput = input(str("user: "))
