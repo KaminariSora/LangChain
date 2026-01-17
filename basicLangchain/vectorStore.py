@@ -15,7 +15,7 @@ Suitable for: ของขวัญวันเกิด, ของที่ร�
 Style: วินเทจ, เรโทร, อบอุ่น
 """,
     metadata={
-        "product_id": 1,
+        "product_id": 1, # id ที่ต่อกับ user
         "category": "stationery",
         "event": "birthday,wedding,corporate",
         "price": 189,
@@ -197,7 +197,6 @@ Style: Minimal, elegant, lightweight.
     }
 )
 
-
 documents = [
     document_1,
     document_2,
@@ -210,7 +209,7 @@ documents = [
     document_9,
     document_10,
 ]
-# generate uid สำหรับใส่ vector database
+# generate uid สำหรับ vector database อันนี้ช่างแม่งเราไม่ได้ยุ่ง Database มันเชื่อมกันเองออโต้
 uuids = [str(uuid4()) for _ in range(len(documents))]
 # ----------------------------------------
 
