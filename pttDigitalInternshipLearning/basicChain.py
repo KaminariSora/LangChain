@@ -18,7 +18,7 @@ prompt = ChatPromptTemplate.from_messages(
 
 # ใช้ Ollama (local model)
 llm = ChatOllama(
-    model="thewindmom/llama3-med42-8b",
+    model="bge-m3:latest",
     temperature=0.8,
     # base_url="http://localhost:11434"  # default ไม่ต้องใส่
 )
