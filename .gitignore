@@ -159,5 +159,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+basicLangchain/Data
 /Data
 basicLangchain/testing_chroma_db
+/SOCTest/data
