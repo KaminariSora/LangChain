@@ -75,7 +75,7 @@ openai_embeddings = OpenAIEmbeddings(
 
 google_embeddings_model = GoogleGenerativeAIEmbeddings(
     model="models/embedding-001",
-    api_key="AIzaSyAVus7xiFN6rZWXz4uKoqT2NvVe1rnr6v8"
+    api_key=google_api_key
 )
 
 from langchain_chroma import Chroma
@@ -89,16 +89,16 @@ client = chromadb.CloudClient(
 )
 
 vectorstore = Chroma(
-    collection_name="ollama_collection",
-    embedding_function=ollama_embeddings_model,
+    collection_name="google_collection",
+    embedding_function=google_embeddings_model,
     client=client
 )
 # เพิ่มข้อมูลลง Chroma
-# vectorstore.add_texts(
-#     texts=records,
-#     metadatas=metadatas,
-#     ids=[str(uuid4()) for _ in records]
-# )
+vectorstore.add_texts(
+    texts=records,
+    metadatas=metadatas,
+    ids=[str(uuid4()) for _ in records]
+)
 
 retriever = vectorstore.as_retriever(
     search_type="similarity",

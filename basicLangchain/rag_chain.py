@@ -18,7 +18,11 @@ google_api_key = os.getenv("GOOGLE_API_KEY")
 prompt = ChatPromptTemplate.from_messages([
     (
         "system",
-        "คุณเป็นแอดมินร้านค้า ตอบจากข้อมูลด้านล่างเท่านั้น ห้ามเดาข้อมูลเพิ่ม\n\n{context}"
+        "คุณเป็นแอดมินร้านค้า ตอบจากข้อมูลด้านล่างเท่านั้น ห้ามเดาข้อมูลเพิ่ม\n\n{context} โดยมีรูปแบบการตอบมีดังนี้"
+        "1. ชื่อสินค้า"
+        "2. ราคา"
+        "3. จำนวนสินค้าคงเหลือในคลัง"
+        "ห้ามตอบนอกเหนือจากรูปแบบที่กำหนดให้"
     ),
     ("human", "{question}")
 ])
@@ -35,7 +39,7 @@ prompt = ChatPromptTemplate.from_messages([
 # )
 
 llm = ChatGoogleGenerativeAI(
-    model="gemini-flash-latest",  # เร็ว + ถูก
+    model="gemini-flash-latest",
     temperature=0.3,
     api_key=google_api_key
 )

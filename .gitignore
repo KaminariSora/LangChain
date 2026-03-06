@@ -161,5 +161,6 @@ cython_debug/
 
 basicLangchain/Data
 /Data
+AIsearch/Data
 basicLangchain/testing_chroma_db
 /SOCTest/data
