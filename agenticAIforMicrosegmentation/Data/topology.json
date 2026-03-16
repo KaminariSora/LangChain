@@ -1,0 +1,34 @@
+{
+  "organization": "FinTech Corp (Simulated)",
+  "segments": {
+    "dmz": {
+      "hosts": {
+        "web-server": "172.20.1.10",
+        "wazuh-manager": "172.20.1.5",
+        "attacker": "172.20.1.99"
+      },
+      "allowed_to": ["app-segment"],
+      "denied_to": ["data-segment"]
+    },
+    "app-segment": {
+      "hosts": {
+        "app-server": "172.20.2.10",
+        "db-server": "172.20.2.20"
+      },
+      "allowed_to": ["data-segment"],
+      "denied_to": ["dmz"]
+    },
+    "data-segment": {
+      "hosts": {
+        "db-server": "172.20.3.10"
+      },
+      "allowed_to": [],
+      "denied_to": ["dmz", "app-segment"]
+    },
+    "quarantine": {
+      "hosts": {},
+      "allowed_to": [],
+      "denied_to": ["*"]
+    }
+  }
+}

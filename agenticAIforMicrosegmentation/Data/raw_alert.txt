@@ -1,0 +1,109 @@
+{
+  "source": "wazuh",
+  "timestamp": "2026-03-15T15:37:48.535+0000",
+  "alert": {
+    "id": "1773589068.28612",
+    "level": 10,
+    "rule_id": "31151",
+    "description": "Multiple web server 400 error codes from same source ip.",
+    "groups": [
+      "web",
+      "accesslog",
+      "web_scan",
+      "recon"
+    ],
+    "mitre": {
+      "id": [
+        "T1595.002"
+      ],
+      "tactic": [
+        "Reconnaissance"
+      ],
+      "technique": [
+        "Vulnerability Scanning"
+      ]
+    }
+  },
+  "agent": {
+    "id": "001",
+    "name": "web-server",
+    "ip": "172.20.1.10"
+  },
+  "network": {
+    "src_ip": "172.20.1.99",
+    "dst_ip": "",
+    "src_port": "",
+    "dst_port": "",
+    "protocol": "GET"
+  },
+  "raw_alert": {
+    "timestamp": "2026-03-15T15:37:48.535+0000",
+    "rule": {
+      "level": 10,
+      "description": "Multiple web server 400 error codes from same source ip.",
+      "id": "31151",
+      "mitre": {
+        "id": [
+          "T1595.002"
+        ],
+        "tactic": [
+          "Reconnaissance"
+        ],
+        "technique": [
+          "Vulnerability Scanning"
+        ]
+      },
+      "frequency": 14,
+      "firedtimes": 4,
+      "mail": true,
+      "groups": [
+        "web",
+        "accesslog",
+        "web_scan",
+        "recon"
+      ],
+      "pci_dss": [
+        "6.5",
+        "11.4"
+      ],
+      "gdpr": [
+        "IV_35.7.d"
+      ],
+      "nist_800_53": [
+        "SA.11",
+        "SI.4"
+      ],
+      "tsc": [
+        "CC6.6",
+        "CC7.1",
+        "CC8.1",
+        "CC6.1",
+        "CC6.8",
+        "CC7.2",
+        "CC7.3"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "web-server",
+      "ip": "172.20.1.10"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1773589068.28612",
+    "previous_output": "172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"\n172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"",
+    "full_log": "172.20.1.99 - - [15/Mar/2026:15:37:48 +0000] \"GET /etc/passwd HTTP/1.1\" 404 434 \"-\" \"curl/8.18.0\"",
+    "decoder": {
+      "name": "web-accesslog"
+    },
+    "data": {
+      "protocol": "GET",
+      "srcip": "172.20.1.99",
+      "id": "404",
+      "url": "/etc/passwd"
+    },
+    "location": "/var/log/apache2/access.log"
+  }
+}
+INFO:     127.0.0.1:53557 - "POST /webhook/wazuh HTTP/1.1" 200 OK
